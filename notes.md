@@ -13,4 +13,5 @@ Steps I did, notes I need etc
 - alembic ini conf - establish a connection to DB - line 58 or so 'sqlalchemy.url = sqlite:///sales.db' we can check alembic init file to see the connection string for the SQLAlchemy engine to talk with db
 - env.py to set target metadata to the Base metadata. Our base is kinda sensor that detects changes. go around line 20ish. adjust strings there to target metadata Base class.
 - created file models.py to create models and Base that we configured in env.py file
-- In models.py, imported declarative_base and variable Base.
+- In models.py, imported declarative_base and variable Base. I created Company class which will be my companies table. Defined attributes(columns). Now I need to turn this schema into DB. => through alembic. -alembic revision --autogenerate -m "message" - then 'alembic upgrade head' after those commands I see companies table is created but it is empty cuz I didn't seed any info in seeds.py yet. I created seeds.py and add some data to populate my db.(I need instanes for rows kinda)
+- then run python3 seeds.py to execute seeds.py so populate db
