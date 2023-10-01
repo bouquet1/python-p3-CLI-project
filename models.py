@@ -9,4 +9,8 @@ class Company(Base):
     
     id = Column(Integer(), primary_key=True)
     company_name = Column(String())
-    
+
+    def __repr__(self):
+        return f"\n <Company "\
+            + f"id={self.id}," \
+            + f"company_name={self.company_name}>"

@@ -15,6 +15,7 @@ companies = [
     Company(company_name="BedroomLand"),
     Company(company_name="REM Kings")
 ]
+print(companies)
 
 session.bulk_save_objects(companies)
 session.commit()
