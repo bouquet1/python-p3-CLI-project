@@ -15,3 +15,13 @@ Steps I did, notes I need etc
 - created file models.py to create models and Base that we configured in env.py file
 - In models.py, imported declarative_base and variable Base. I created Company class which will be my companies table. Defined attributes(columns). Now I need to turn this schema into DB. => through alembic. -alembic revision --autogenerate -m "message" - then 'alembic upgrade head' after those commands I see companies table is created but it is empty cuz I didn't seed any info in seeds.py yet. I created seeds.py and add some data to populate my db.(I need instanes for rows kinda)
 - then run python3 seeds.py to execute seeds.py so populate db
+- Done for today
+- Another day for migrations
+- start w pipenv shell
+-
+
+NOTES FOR BLOG: schema and migrations
+schema is a blueprint (recipe you noted down)
+base class is a sensor
+migrations are python instructions that specify how to construct and modify a DB.
+changes and modifications in a recipe f.e Tom's lecture is great for inspiration.

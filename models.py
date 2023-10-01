@@ -1,5 +1,5 @@
 from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 
 
 Base = declarative_base()
@@ -14,3 +14,16 @@ class Company(Base):
         return f"\n <Company "\
             + f"id={self.id}," \
             + f"company_name={self.company_name}>"
+    
+class Store(Base):
+    __tablename__ = "stores"
+    
+    id = Column(Integer(), primary_key=True)
+    company_id = Column(Integer(), )
+
+    def __repr__(self):
+        return f"\n <Company "\
+            + f"id={self.id}," \
+            + f"company_name={self.company_name}>"
+    
+

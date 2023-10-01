@@ -9,7 +9,7 @@ session = Session()
 
 session.query(Company).delete()
 
-print("testing seeds.py to populate DB")
+print("Test Seeding!")
 
 companies = [
     Company(company_name="BedroomLand"),
@@ -21,3 +21,4 @@ session.bulk_save_objects(companies)
 session.commit()
 
 print("Done Seeding!")
+
