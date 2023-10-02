@@ -32,7 +32,8 @@ class Store(Base):
     state = Column(String())
     zip_code = Column(String())
 
-
+    salespersons = relationship('Salesperson', backref='stores')
+    companies = association_proxy('salespersons', 'company', creator=lambda cm: Salesperson(company=cm))
 
     def __repr__(self):
         return f"<Store "\
