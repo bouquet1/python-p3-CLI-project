@@ -1,12 +1,12 @@
 from sqlalchemy.orm import declarative_base, relationship, backref
 from sqlalchemy import Column, Integer, String, ForeignKey, MetaData
-from sqlalchemy.ext.associationproxy import association_proxy
 
-convention = {
-    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
-}
 
-metadata = MetaData(naming_convention=convention)
+# convention = {
+#     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+# }
+
+# metadata = MetaData(naming_convention=convention)
 
 Base = declarative_base()
 
@@ -17,8 +17,7 @@ class Company(Base):
     company_name = Column(String())
 
     stores = relationship('Store', backref='company')
-    salespersons = association_proxy('stores', 'salesperson', 
-        creator=lambda sa: Store(salesperson=sa))
+    salespersons = relationship('Salesperson', backref='company')
 
     def __repr__(self):
         return f"<Company "\
@@ -36,9 +35,9 @@ class Store(Base):
     city = Column(String())
     state = Column(String())
     zip_code = Column(String())
+    company_id = Column(Integer(), ForeignKey('companies.id'))
 
-    salespersons = relationship('Salesperson', backref='stores')
-    companies = association_proxy('salespersons', 'company', creator=lambda cm: Salesperson(company=cm))
+    salespersons = relationship('Salesperson', backref='store')
 
     def __repr__(self):
         return f"<Store "\
@@ -53,8 +52,27 @@ class Salesperson(Base):
     last_name = Column(String())
     email = Column(String())
     phone = Column(String())
-    company_id = Column(Integer(), ForeignKey('companies.id'))
     store_id = Column(Integer(), ForeignKey('stores.id'))
+    company_id = Column(Integer(), ForeignKey('companies.id'))
+
+
+    def __repr__(self):
+        return f"<Company "\
+            + f"id={self.id}," \
+            + f"company_name={self.company_name}>"
+
+class Sale(Base):
+    __tablename__ = "sales"
+    
+    id = Column(Integer(), primary_key=True)
+    set_sold = Column(Integer())
+    set_price = Column(Integer())
+    mattress_sold = Column(Integer())
+    mattress_price = Column(Integer())
+    
+
+    # company_id = Column(Integer(), ForeignKey('companies.id'))
+    # store_id = Column(Integer(), ForeignKey('stores.id'))
 
 
     def __repr__(self):

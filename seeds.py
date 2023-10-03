@@ -9,7 +9,7 @@ session = Session()
 
 session.query(Company).delete()
 
-print("Test Seeding!")
+print("Start Seeding!")
 
 companies = [
     Company(company_name="BedroomLand"),
