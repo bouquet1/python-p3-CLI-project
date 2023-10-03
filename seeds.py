@@ -22,3 +22,5 @@ session.commit()
 
 print("Done Seeding!")
 
+import ipdb; ipdb.set_trace()
+# Dont forget to add ipdb as a dependency pipenv install ipdb

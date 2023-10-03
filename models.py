@@ -1,4 +1,4 @@
-from sqlalchemy.orm import declarative_base, relationship, backref
+from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy import Column, Integer, String, ForeignKey, MetaData
 
 
@@ -70,10 +70,8 @@ class Sale(Base):
     mattress_sold = Column(Integer())
     mattress_price = Column(Integer())
     
-
     # company_id = Column(Integer(), ForeignKey('companies.id'))
     # store_id = Column(Integer(), ForeignKey('stores.id'))
-
 
     def __repr__(self):
         return f"<Company "\
