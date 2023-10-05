@@ -21,6 +21,8 @@ def delete_data():
 
 print("Start Seeding!")
 
+session.query(Company).delete()
+
 companies = [
     Company(company_name="BedroomLand"),
     Company(company_name="REM Kings")
@@ -61,9 +63,11 @@ def populate_stores():
         zip_code = "77036"
         )
     ]
+   
     
     session.add_all(stores)
     session.commit()
+    print(stores)
     return stores
 
 

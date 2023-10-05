@@ -82,7 +82,7 @@ class Sale(Base):
     company_id = Column(Integer(), ForeignKey('companies.id'))
     store_id = Column(Integer(), ForeignKey('stores.id'))
     
-    salespersons = relationship('Saleperson', secondary=sale_salesperson, back_populates='sales')
+    salespersons = relationship('Salesperson', secondary=sale_salesperson, back_populates='sales')
 
 
     def __repr__(self):
