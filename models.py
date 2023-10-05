@@ -8,7 +8,7 @@ convention = {
 
 metadata = MetaData(naming_convention=convention)
 
-Base = declarative_base()
+Base = declarative_base(metadata=metadata)
 
 class Company(Base):
     __tablename__ = "companies"
@@ -77,7 +77,7 @@ class Sale(Base):
     id = Column(Integer(), primary_key=True)
     set_sold = Column(Integer())
     set_price = Column(Integer())
-    mattress_sold = Column(Integer())
+    only_mattress_sold = Column(Integer())
     mattress_price = Column(Integer())
     company_id = Column(Integer(), ForeignKey('companies.id'))
     store_id = Column(Integer(), ForeignKey('stores.id'))
