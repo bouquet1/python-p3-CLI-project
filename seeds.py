@@ -21,8 +21,6 @@ def delete_data():
 
 print("Start Seeding!")
 
-session.query(Company).delete()
-
 companies = [
     Company(company_name="BedroomLand"),
     Company(company_name="REM Kings")
@@ -64,8 +62,8 @@ def populate_stores():
         )
     ]
    
-    
-    session.add_all(stores)
+
+    session.bulk_save_objects(stores)
     session.commit()
     print(stores)
     return stores
@@ -114,7 +112,7 @@ def populate_sales():
         ),
     ]
     
-    session.add_all(sales)
+    session.bulk_save_objects(sales)
     session.commit()
     return sales
 
