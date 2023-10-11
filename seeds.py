@@ -124,15 +124,15 @@ def populate_sales():
         numb_salesperson = len(session.query(Salesperson).all())
         salesperson_id = random.randint(1, numb_salesperson)
         salesperson = session.query(Salesperson).filter(Salesperson.id == salesperson_id).first()
-        sale.salesperson.append(salesperson)
+        sale.salespersons.append(salesperson)
 
-        # session.add(salesperson)
-        # session.commit()
-        print(numb_salesperson)
+        session.add(salesperson)
+        session.commit()
+        # print(numb_salesperson)
 
-    # return sales
+    return sales
 
-populate_sales()
+sales = populate_sales()
 
 query_salespersons = session.query(Salesperson.first_name).all()
 print(query_salespersons)
