@@ -133,8 +133,10 @@ def populate_sales():
     return sales
 
 # populate_sales()
+
 query_salespersons = session.query(Salesperson.first_name).all()
 print(query_salespersons)
+
 
 print("Done Seeding!")
 
