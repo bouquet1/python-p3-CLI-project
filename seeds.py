@@ -2,6 +2,7 @@ from models import Company, Store, Salesperson, Sale, sale_salesperson
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from faker import Faker
+import random
 
 fake = Faker()
 
@@ -18,6 +19,7 @@ def delete_data():
     session.query(sale_salesperson).delete()
     session.commit()
 
+delete_data()
 
 print("Start Seeding!")
 
@@ -27,7 +29,8 @@ companies = [
 ]
 session.bulk_save_objects(companies)
 session.commit()
-print(companies)
+
+
 
 #seed stores db
 def populate_stores():
@@ -62,11 +65,12 @@ def populate_stores():
         )
     ]
    
-
     session.bulk_save_objects(stores)
     session.commit()
-    print(stores)
     return stores
+
+populate_stores()
+
 
 
 def populate_salespersons():
@@ -83,6 +87,7 @@ def populate_salespersons():
         salespersons.append(salesperson)
     return salespersons
 
+populate_salespersons()
 
 def populate_sales():
     sales = [
@@ -111,10 +116,23 @@ def populate_sales():
         mattress_price = 5800
         ),
     ]
-    
+
     session.bulk_save_objects(sales)
     session.commit()
+
+    for sale in sales:
+        numb_salesperson = len(session.query(Salesperson).all())
+        salesperson_id = random.randint(1, numb_salesperson)
+        salesperson = session.query(Salesperson).filter(Salesperson.id == salesperson_id)
+        sale.salespersons.append(salesperson)
+
+        session.add(salesperson)
+        session.commit()
+        print(numb_salesperson)
+
     return sales
+
+populate_sales()
 
 print("Done Seeding!")
 

@@ -10,4 +10,4 @@
 ### Initializing Migrations
 
 - alembic init migrations
--
+- qoqoqoqoq
