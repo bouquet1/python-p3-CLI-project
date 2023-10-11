@@ -104,8 +104,8 @@ def populate_sales():
         mattress_price = 6200
         ),
         Sale(
-        set_sold = 1, 
-        set_price = 16700, 
+        set_sold = 2, 
+        set_price = 33400, 
         only_mattress_sold = 0, 
         mattress_price = 0
         ),
@@ -123,16 +123,16 @@ def populate_sales():
     for sale in sales:
         numb_salesperson = len(session.query(Salesperson).all())
         salesperson_id = random.randint(1, numb_salesperson)
-        salesperson = session.query(Salesperson).filter(Salesperson.id == salesperson_id)
-        # sale.salesperson.append(salesperson)
+        salesperson = session.query(Salesperson).filter(Salesperson.id == salesperson_id).first()
+        sale.salesperson.append(salesperson)
 
-        session.add(salesperson)
-        session.commit()
+        # session.add(salesperson)
+        # session.commit()
         print(numb_salesperson)
 
-    return sales
+    # return sales
 
-# populate_sales()
+populate_sales()
 
 query_salespersons = session.query(Salesperson.first_name).all()
 print(query_salespersons)
