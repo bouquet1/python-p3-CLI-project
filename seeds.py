@@ -124,7 +124,7 @@ def populate_sales():
         numb_salesperson = len(session.query(Salesperson).all())
         salesperson_id = random.randint(1, numb_salesperson)
         salesperson = session.query(Salesperson).filter(Salesperson.id == salesperson_id)
-        sale.salespersons.append(salesperson)
+        # sale.salesperson.append(salesperson)
 
         session.add(salesperson)
         session.commit()
@@ -132,9 +132,11 @@ def populate_sales():
 
     return sales
 
-populate_sales()
+# populate_sales()
+query_salespersons = session.query(Salesperson.first_name).all()
+print(query_salespersons)
 
 print("Done Seeding!")
 
 import ipdb; ipdb.set_trace()
-# Dont forget to add ipdb as a dependency pipenv install ipdb
+
