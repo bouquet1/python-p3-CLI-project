@@ -64,7 +64,7 @@ class Salesperson(Base):
     company_id = Column(Integer(), ForeignKey('companies.id'))
     # to make it easier for user
 
-    sales = relationship('Sale', secondary=sale_salesperson, back_populates='salespersons')
+    sales = relationship('Sale', secondary=mattress_salesperson, back_populates='salespersons')
 
     def __repr__(self):
         return f"<Salesperson "\
@@ -90,7 +90,7 @@ class Mattress(Base):
     company_id = Column(Integer(), ForeignKey('companies.id'))
     store_id = Column(Integer(), ForeignKey('stores.id'))
     
-    salespersons = relationship('Salesperson', secondary=sale_salesperson, back_populates='sales')
+    salespersons = relationship('Salesperson', secondary=mattress_salesperson, back_populates='sales')
 
 
     def __repr__(self):
