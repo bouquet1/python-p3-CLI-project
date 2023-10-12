@@ -1,4 +1,4 @@
-from models import Company, Store, Salesperson, Mattress, sale_salesperson
+from models import Company, Store, Salesperson, Mattress, mattress_salesperson
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from faker import Faker
@@ -16,7 +16,7 @@ def delete_data():
     session.query(Store).delete()
     session.query(Salesperson).delete()
     session.query(Mattress).delete()
-    session.query(sale_salesperson).delete()
+    session.query(mattress_salesperson).delete()
     session.commit()
 
 delete_data()
@@ -90,7 +90,7 @@ def populate_salespersons():
 populate_salespersons()
 
 def populate_matresses():
-    matresses = [
+    mattresses = [
         Mattress(
             queen_sold=1,
             queen_price=16700,
@@ -152,7 +152,7 @@ def populate_matresses():
         ),
     ]
 
-    session.bulk_save_objects(sales)
+    session.bulk_save_objects(mattresses)
     session.commit()
 
     for mattress in matresses:

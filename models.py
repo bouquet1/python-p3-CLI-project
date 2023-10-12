@@ -44,12 +44,12 @@ class Store(Base):
             + f"company_address={self.address_line_1}, {self.address_line_2},{self.apt_or_suite}, {self.city}, {self.state}, {self.zip_code}>"
     
 
-sale_salesperson = Table(
-    "sale_salespersons",
+mattress_salesperson = Table(
+    "mattress_salespersons",
     Base.metadata,
     Column("id", Integer(), primary_key=True),
     Column("salesperson_id", ForeignKey("salespersons.id")),
-    Column("sale_id", ForeignKey("sales.id"))  
+    Column("mattress_id", ForeignKey("mattresses.id"))  
 )
     
 class Salesperson(Base):
