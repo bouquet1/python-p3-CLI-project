@@ -67,22 +67,26 @@ class Salesperson(Base):
     sales = relationship('Sale', secondary=sale_salesperson, back_populates='salespersons')
 
     def __repr__(self):
-        return f"<Company "\
+        return f"<Salesperson "\
             + f"id={self.id}," \
-            + f"company_name={self.company_name}>"
+            + f"salesperson_name={self.first_name}>"
 
-class Mattress(Base):
-    __tablename__ = "matresses"
+class Sale(Base):
+    __tablename__ = "sales"
     
     id = Column(Integer(), primary_key=True)
     queen_sold = Column(Integer(), default=0) 
-    king_sold = Column(Integer(), default=0) 
-    full_sold = Column(Integer(), default=0) 
-    twin_sold = Column(Integer(), default=0)
     queen_price = Column(Integer())
+    queen_amount = Column(Integer(), default=0)
+    king_sold = Column(Integer(), default=0) 
     king_price = Column(Integer()) 
+    king_amount = Column(Integer(), default=0)
+    full_sold = Column(Integer(), default=0) 
     full_price = Column(Integer()) 
+    full_amount = Column(Integer(), default=0)
+    twin_sold = Column(Integer(), default=0)
     twin_price = Column(Integer()) 
+    twin_amount = Column(Integer(), default=0) 
     company_id = Column(Integer(), ForeignKey('companies.id'))
     store_id = Column(Integer(), ForeignKey('stores.id'))
     
@@ -90,7 +94,19 @@ class Mattress(Base):
 
 
     def __repr__(self):
-        return f"<Company "\
-            + f"id={self.id}," \
-            + f"company_name={self.company_name}>"
+        return f"<Sale (id={self.id},"\
+        + f" queen_sold={self.queen_sold},\n"\
+        + f" king_sold={self.king_sold},\n"\
+        + f" king_price={self.king_price},\n"\
+        + f" full_sold={self.full_sold},\n"\
+        + f" twin_sold={self.twin_sold},\n"\
+        + f" queen_price={self.queen_price},\n"\
+        + f" full_price={self.full_price},\n"\
+        + f" twin_price={self.twin_price},\n"\
+        + f" queen_amount={self.queen_amount},\n"\
+        + f" king_amount={self.king_amount},\n"\
+        + f" full_amount={self.full_amount},\n"\
+        + f" twin_amount={self.twin_amount})>"
+    
+
 
