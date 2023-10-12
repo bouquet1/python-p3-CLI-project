@@ -71,8 +71,8 @@ class Salesperson(Base):
             + f"id={self.id}," \
             + f"salesperson_name={self.first_name}>"
 
-class Sale(Base):
-    __tablename__ = "sales"
+class Mattress(Base):
+    __tablename__ = "matresses"
     
     id = Column(Integer(), primary_key=True)
     queen_sold = Column(Integer(), default=0) 
