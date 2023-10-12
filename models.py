@@ -71,14 +71,18 @@ class Salesperson(Base):
             + f"id={self.id}," \
             + f"company_name={self.company_name}>"
 
-class Sale(Base):
-    __tablename__ = "sales"
+class Mattress(Base):
+    __tablename__ = "matresses"
     
     id = Column(Integer(), primary_key=True)
-    set_sold = Column(Integer())
-    set_price = Column(Integer())
-    only_mattress_sold = Column(Integer())
-    mattress_price = Column(Integer())
+    queen_sold = Column(Integer(), default=0) 
+    king_sold = Column(Integer(), default=0) 
+    full_sold = Column(Integer(), default=0) 
+    twin_sold = Column(Integer(), default=0)
+    queen_price = Column(Integer())
+    king_price = Column(Integer()) 
+    full_price = Column(Integer()) 
+    twin_price = Column(Integer()) 
     company_id = Column(Integer(), ForeignKey('companies.id'))
     store_id = Column(Integer(), ForeignKey('stores.id'))
     
