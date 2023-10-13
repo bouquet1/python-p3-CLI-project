@@ -20,7 +20,7 @@ def run():
             user_selection = int(user_input)
             if 1 <= user_selection <= 3:
                 handle_user_selection(user_selection)
-                #exit loop when walid selection is amde
+                #exit loop when walid selection is made
                 break
             else:
                 print("Incorrect selection. Please choose a selection 1-3.\n")
@@ -32,12 +32,15 @@ def list_stores(session):
     stores = session.query(Store).all()
     store_list =[]
     for store in stores:
-        store_info = f"<Store "\
-            + f"Id={store.id}," \
-            + f"Company address= {store.address_line_1}, {store.address_line_2},{store.apt_or_suite}, {store.city}, {store.state}, {store.zip_code}>"
+        store_info = (
+            f"<Store "
+            f"id={store.id},\n"
+            f"Company address={store.address}, {store.apt_or_suite}, "
+            f"{store.city}, {store.state}, {store.zip_code}>"
+        )
         store_list.append(store_info)
 
-    return '\n'.join(store_list)
+    return store_list
 
 def list_salespersons(session):
     salespersons = session.query(Salesperson).all()
@@ -50,7 +53,7 @@ def list_salespersons(session):
         )
         salesperson_list.append(salesperson_info)
 
-    return '\n'.join(salesperson_list)
+    return salesperson_list
 
 
 def list_sales(session):
@@ -67,7 +70,8 @@ def list_sales(session):
             f"Store ID: {sale.store_id}"
         )
         sales_list.append(sale_info)
-    return '\n'.join(sales_list)
+
+    return sales_list
 
 
 def handle_user_selection(selection):
@@ -78,10 +82,14 @@ def handle_user_selection(selection):
             print(store)
     elif selection == 2:
         print("You selected the List of the salespersons")
-        list_salespersons(session)
+        salespersons = list_salespersons(session)
+        for salesperson in salespersons:
+            print(salesperson)
     elif selection == 3:
         print("You selected the List of the stores")
-        list_sales(session)
+        sales = list_sales(session)
+        for sale in sales:
+            print(sale)
 
     # import ipdb; ipdb.set_trace()
 
