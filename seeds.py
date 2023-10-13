@@ -92,8 +92,8 @@ populate_salespersons()
 def populate_sales():
     sales = [
         Sale(
-            queen_sold=1,
-            queen_price=16700,
+            queen_sold=3,
+            queen_price=7000,
             king_sold=0,
             king_price=0,
             full_sold=0,
