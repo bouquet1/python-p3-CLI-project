@@ -45,11 +45,8 @@ def list_salespersons(session):
     for salesperson in salespersons:
         salesperson_info = (
             f"<Salesperson "\
-            + f"Id={salesperson.id}," \
-            + f"Salesperson Information ={salesperson.first_name}\ ,  
-                {salesperson.last_name}\, 
-                {salesperson.email}\, 
-                {salesperson.phone}>"
+            + f"Id={salesperson.id}," 
+            + f"Salesperson Information ={salesperson.first_name}, {salesperson.last_name}, {salesperson.email}, {salesperson.phone}>"
         )
         salesperson_list.append(salesperson_info)
 
@@ -84,7 +81,6 @@ def handle_user_selection(selection):
         print("You selected the List of the stores")
         list_sales(session)
 
-    import ipdb; ipdb.set_trace()
-
+    # import ipdb; ipdb.set_trace()
 
 run()
