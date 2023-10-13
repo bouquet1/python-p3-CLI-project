@@ -63,7 +63,7 @@ python run.py
 
 ## Improvements / Roadmap
 
-Start the db again with a better ERD to build relationships between a Mattress, Sale, Salesperson, and Customer.
+Delete the old database and create a new database with a better ERD to build relationships between a Mattress, Sale, Salesperson, and Customer.
 
 My schema plan:
 
