@@ -1,4 +1,4 @@
-from models import Company, Store, Salesperson, Mattress, mattress_salesperson
+from models import Company, Store, Salesperson, Sale, sale_salesperson
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from faker import Faker
@@ -15,8 +15,8 @@ def delete_data():
     session.query(Company).delete()
     session.query(Store).delete()
     session.query(Salesperson).delete()
-    session.query(Mattress).delete()
-    session.query(mattress_salesperson).delete()
+    session.query(Sale).delete()
+    session.query(sale_salesperson).delete()
     session.commit()
 
 delete_data()
@@ -89,9 +89,9 @@ def populate_salespersons():
 
 populate_salespersons()
 
-def populate_matresses():
-    mattresses = [
-        Mattress(
+def populate_sales(session, salespersons):
+    sales = [
+        Sale(
             queen_sold=1,
             queen_price=16700,
             king_sold=0,
@@ -102,19 +102,7 @@ def populate_matresses():
             twin_price=0,
             store_id=1,
         ),
-        Mattress(
-            queen_sold=1,
-            queen_price=16700,
-            king_sold=0,
-            king_price=0,
-            full_sold=0,
-            full_price=0,
-            twin_sold=0,
-            twin_price=0,
-            company_id=1,
-            store_id=1,
-        ),
-        Mattress(
+        Sale(
             queen_sold=1,
             queen_price=16700,
             king_sold=0,
@@ -126,7 +114,7 @@ def populate_matresses():
             company_id=1,
             store_id=1,
         ),
-        Mattress(
+        Sale(
             queen_sold=1,
             queen_price=16700,
             king_sold=0,
@@ -138,7 +126,19 @@ def populate_matresses():
             company_id=1,
             store_id=1,
         ),
-        Mattress(
+        Sale(
+            queen_sold=1,
+            queen_price=16700,
+            king_sold=0,
+            king_price=0,
+            full_sold=0,
+            full_price=0,
+            twin_sold=0,
+            twin_price=0,
+            company_id=1,
+            store_id=1,
+        ),
+        Sale(
             queen_sold=1,
             queen_price=16700,
             king_sold=0,
@@ -152,22 +152,36 @@ def populate_matresses():
         ),
     ]
 
-    session.bulk_save_objects(mattresses)
+    session.bulk_save_objects(sales)
     session.commit()
 
-    for mattress in matresses:
-        numb_salesperson = len(session.query(Salesperson).all())
-        salesperson_id = random.randint(1, numb_salesperson)
-        salesperson = session.query(Salesperson).filter(Salesperson.id == salesperson_id).first()
-        mattress.salespersons.append(salesperson)
+    #associate sales with salesperson
+    random.shuffle(query_salespersons)
+    # Shuffle the list of salespersons to distribute sales randomly
+    random.shuffle(salespersons)
 
-        session.add(salesperson)
-        session.commit()
-        # print(numb_salesperson)
+    # Assign sales to salespersons
+    for sale, salesperson in zip(sales, salespersons):
+        # Assign the sale to the salesperson
+        sale.salespersons.append(salesperson)
 
-    return matresses
+    # Commit the changes to your database session
+    session.commit()
 
-matresses= populate_matresses()
+    # associate sales with a random salesperson
+    # for sale in sales:
+    #     numb_salesperson = len(session.query(Salesperson).all())
+    #     salesperson_id = random.randint(1, numb_salesperson)
+    #     salesperson = session.query(Salesperson).filter(Salesperson.id == salesperson_id).first()
+    #     sale.salespersons.append(salesperson)
+
+    #     session.add(salesperson)
+    #     session.commit()
+    #     # print(numb_salesperson)
+
+    return sales
+
+sales= populate_sales()
 
 query_salespersons = session.query(Salesperson.first_name).all()
 print(query_salespersons)

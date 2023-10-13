@@ -44,12 +44,12 @@ class Store(Base):
             + f"company_address={self.address_line_1}, {self.address_line_2},{self.apt_or_suite}, {self.city}, {self.state}, {self.zip_code}>"
     
 
-mattress_salesperson = Table(
-    "mattress_salespersons",
+sale_salesperson = Table(
+    "sale_salespersons",
     Base.metadata,
     Column("id", Integer(), primary_key=True),
     Column("salesperson_id", ForeignKey("salespersons.id")),
-    Column("mattress_id", ForeignKey("mattresses.id"))  
+    Column("sale_id", ForeignKey("sales.id"))  
 )
     
 class Salesperson(Base):
@@ -64,15 +64,15 @@ class Salesperson(Base):
     company_id = Column(Integer(), ForeignKey('companies.id'))
     # to make it easier for user
 
-    sales = relationship('Sale', secondary=mattress_salesperson, back_populates='salespersons')
+    sales = relationship('Sale', secondary=sale_salesperson, back_populates='salespersons')
 
     def __repr__(self):
         return f"<Salesperson "\
             + f"id={self.id}," \
             + f"salesperson_name={self.first_name}>"
 
-class Mattress(Base):
-    __tablename__ = "matresses"
+class Sale(Base):
+    __tablename__ = "sales"
     
     id = Column(Integer(), primary_key=True)
     queen_sold = Column(Integer(), default=0) 
@@ -90,22 +90,22 @@ class Mattress(Base):
     company_id = Column(Integer(), ForeignKey('companies.id'))
     store_id = Column(Integer(), ForeignKey('stores.id'))
     
-    salespersons = relationship('Salesperson', secondary=mattress_salesperson, back_populates='sales')
+    salespersons = relationship('Salesperson', secondary=sale_salesperson, back_populates='sales')
 
 
     def __repr__(self):
         return f"<Sale (id={self.id},"\
         + f" queen_sold={self.queen_sold},\n"\
+        + f" queen_price={self.queen_price},\n"\
+        + f" queen_amount={self.queen_amount},\n"\
         + f" king_sold={self.king_sold},\n"\
         + f" king_price={self.king_price},\n"\
-        + f" full_sold={self.full_sold},\n"\
-        + f" twin_sold={self.twin_sold},\n"\
-        + f" queen_price={self.queen_price},\n"\
-        + f" full_price={self.full_price},\n"\
-        + f" twin_price={self.twin_price},\n"\
-        + f" queen_amount={self.queen_amount},\n"\
         + f" king_amount={self.king_amount},\n"\
+        + f" full_sold={self.full_sold},\n"\
+        + f" full_price={self.full_price},\n"\
         + f" full_amount={self.full_amount},\n"\
+        + f" twin_sold={self.twin_sold},\n"\
+        + f" twin_price={self.twin_price},\n"\
         + f" twin_amount={self.twin_amount})>"
     
 
