@@ -100,6 +100,7 @@ def populate_sales():
             full_price=0,
             twin_sold=0,
             twin_price=0,
+            company_id=1,
             store_id=1,
         ),
         Sale(
