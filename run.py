@@ -17,7 +17,7 @@ def run():
     while True:
         user_input = input("Please make a selection (1-3): ")
         if user_input.isdigit():
-            user_selection = int(input)
+            user_selection = int(user_input)
             if 1 <= user_selection <= 3:
                 handle_user_selection(user_selection)
                 #exit loop when walid selection is amde
@@ -73,7 +73,9 @@ def list_sales(session):
 def handle_user_selection(selection):
     if selection == 1:
         print("You selected the List of the stores")
-        list_stores(session)
+        stores = list_stores(session)
+        for store in stores:
+            print(store)
     elif selection == 2:
         print("You selected the List of the salespersons")
         list_salespersons(session)
