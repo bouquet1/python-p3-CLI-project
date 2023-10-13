@@ -33,20 +33,58 @@ def list_stores(session):
     store_list =[]
     for store in stores:
         store_info = f"<Store "\
-            + f"id={store.id}," \
-            + f"company_address={store.address_line_1}, {store.address_line_2},{store.apt_or_suite}, {store.city}, {store.state}, {store.zip_code}>"
+            + f"Id={store.id}," \
+            + f"Company address= {store.address_line_1}, {store.address_line_2},{store.apt_or_suite}, {store.city}, {store.state}, {store.zip_code}>"
         store_list.append(store_info)
 
     return '\n'.join(store_list)
+
+def list_salespersons(session):
+    salespersons = session.query(Salesperson).all()
+    salesperson_list =[]
+    for salesperson in salespersons:
+        salesperson_info = (
+            f"<Salesperson "\
+            + f"Id={salesperson.id}," \
+            + f"Salesperson Information ={salesperson.first_name}\ ,  
+                {salesperson.last_name}\, 
+                {salesperson.email}\, 
+                {salesperson.phone}>"
+        )
+        salesperson_list.append(salesperson_info)
+
+    return '\n'.join(salesperson_list)
+
+
+def list_sales(session):
+    sales = session.query(Sale).all()
+    sales_list = []
+    for sale in sales:
+        sale_info = (
+            f"ID: {sale.id}, "
+            f"Queen Sold: {sale.queen_sold}, "
+            f"King Sold: {sale.king_sold}, "
+            f"Full Sold: {sale.full_sold}, "
+            f"Twin Sold: {sale.twin_sold}, "
+            f"Company ID: {sale.company_id}, "
+            f"Store ID: {sale.store_id}"
+        )
+        sales_list.append(sale_info)
+    return '\n'.join(sales_list)
 
 
 def handle_user_selection(selection):
     if selection == 1:
         print("You selected the List of the stores")
         list_stores(session)
+    elif selection == 2:
+        print("You selected the List of the salespersons")
+        list_salespersons(session)
+    elif selection == 3:
+        print("You selected the List of the stores")
+        list_sales(session)
 
-        import ipdb; ipdb.set_trace()
-
+    import ipdb; ipdb.set_trace()
 
 
 run()
