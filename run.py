@@ -91,6 +91,6 @@ def handle_user_selection(selection):
         for sale in sales:
             print(sale)
 
-    # import ipdb; ipdb.set_trace()
+# import ipdb; ipdb.set_trace()
 
 run()
