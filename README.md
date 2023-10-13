@@ -34,6 +34,10 @@ So, salespersons and sales has many-to-many relationship while other has one-to-
 
 My repository includes a built-in seeding file for populating the database with test data. This functionality facilitates comprehensive testing of the application's features.
 
+### Information
+
+While this application functions, it falls short of typical expectations for a retail Sales Tracker. I purposefully created this project to showcase my ability to craft Python classes and skillfully map them to a database using SQLAlchemy. Moreover, I adeptly oversaw database migrations with Alembic to establish connections between these classes. I'm fully aware of the need for enhancements, and in the 'Improvements' section below, I provide my self-reflection on how I plan to elevate the project.
+
 ### Installation
 
 In your teminal fork and copy the SSH, navigate to the folder you wish to clone the repo into and use this syntax to clone it to uour local environment.
@@ -57,20 +61,19 @@ Then to start the app run the following command:
 
 python run.py
 
-WRITE THIS PAERT AGAIN it is from canvas
+## Improvements / Roadmap
 
-Information
-This application while functional, does not include many aspects one might expect an Event planner to have. This project was built with the goal of displaying the ability to create python classes and successfully map them to a database using SQLAlchemy. Then manage proper database migrations using Alembic when creating the relationships between said classes.
+Start the db again with a better ERD to build relationships between a Mattress, Sale, Salesperson, and Customer.
 
-Improvements / Roadmap
-Add method to edit owned event name.
-Add method to edit username
-Add more attributes to the Event Class so that it feels more like a real event (due to time constraints, left some of these out in favor of building out the CLI application)
-Add more secure login with User Password. Would probably only add this to 1, show that i'm capable and 2, if I was going to expand this into a fully fledged application
-Resources
-https://pypi.org/ -- Used this site to find the CLI text color changer, as well as a package to create the banner message
-Check pipfile for full list of packages used
+My schema plan:
 
-https://docs.sqlalchemy.org/en/14/index.html -- Constantly had to check and recheck the SQLAlchemy docs while building out my classes and ensuring the relationships were working as intended
+- My app should allow user to track sales transactions, associate them with specific products (mattresses), and identify the salesperson and customer involved in each transaction.
+- Each Sale record associates a specific Mattress with a Salesperson and a Customer.
+- Should have a login with User Password.
+- My app should expand and customize the schema based on specific requirements, such as adding more attributes to each table or incorporating additional entities.
 
-Huge thanks to the Flatiron instructors. Everything that went into creating this project felt extremely overwhelming trying to learn at once. Thru watching and rewatching some of the demonstrations and lectures, I was able to work my way through this project and create a proper CLI application!!! Thank you!
+### Resources
+
+https://docs.sqlalchemy.org/en/14/index.html -- This source was my main source after the lectures, class notes, and articles that are provided to me by Flatiron School and my instructors/coaches. I repeadetly checked the SQLAlchemy docs while building out my classes and relationships.
+
+To see the full list of packages that is used, please check pipfile
