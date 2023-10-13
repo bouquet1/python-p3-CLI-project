@@ -89,7 +89,7 @@ def populate_salespersons():
 
 populate_salespersons()
 
-def populate_sales(session, salespersons):
+def populate_sales():
     sales = [
         Sale(
             queen_sold=1,
@@ -155,29 +155,16 @@ def populate_sales(session, salespersons):
     session.bulk_save_objects(sales)
     session.commit()
 
-    #associate sales with salesperson
-    random.shuffle(query_salespersons)
-    # Shuffle the list of salespersons to distribute sales randomly
-    random.shuffle(salespersons)
-
-    # Assign sales to salespersons
-    for sale, salesperson in zip(sales, salespersons):
-        # Assign the sale to the salesperson
+    #associate sales with a random salesperson
+    for sale in sales:
+        numb_salesperson = len(session.query(Salesperson).all())
+        salesperson_id = random.randint(1, numb_salesperson)
+        salesperson = session.query(Salesperson).filter(Salesperson.id == salesperson_id).first()
         sale.salespersons.append(salesperson)
 
-    # Commit the changes to your database session
-    session.commit()
-
-    # associate sales with a random salesperson
-    # for sale in sales:
-    #     numb_salesperson = len(session.query(Salesperson).all())
-    #     salesperson_id = random.randint(1, numb_salesperson)
-    #     salesperson = session.query(Salesperson).filter(Salesperson.id == salesperson_id).first()
-    #     sale.salespersons.append(salesperson)
-
-    #     session.add(salesperson)
-    #     session.commit()
-    #     # print(numb_salesperson)
+        session.add(salesperson)
+        session.commit()
+        # print(numb_salesperson)
 
     return sales
 
